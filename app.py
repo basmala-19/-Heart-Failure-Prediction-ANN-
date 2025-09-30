@@ -53,8 +53,10 @@ input_data = pd.DataFrame({
 input_encoded = pd.get_dummies(input_data)
 # Ensure same columns as training
 # (You need to save training columns from notebook into pickle)
-with open("models/columns.pkl", "rb") as f:
+with open("models/columns1.pkl", "rb") as f:
     training_columns = pickle.load(f)
+ scaler = joblib.load("models/scaler.pkl")
+
 
 for col in training_columns:
     if col not in input_encoded:
@@ -73,5 +75,6 @@ if st.button("Predict"):
         st.error("⚠️ The model predicts **Heart Disease**.")
     else:
         st.success("✅ The model predicts **No Heart Disease**.")
+
 
 
