@@ -10,7 +10,7 @@ import pickle
 @st.cache_resource
 def load_model():
  
-    model = tf.keras.models.load_model("heart_failure_ann.h5")
+    model = tf.keras.models.load_model("models/heart_failure_ann.h5")
     return model
 
 model = load_model()
@@ -53,7 +53,7 @@ input_data = pd.DataFrame({
 input_encoded = pd.get_dummies(input_data)
 # Ensure same columns as training
 # (You need to save training columns from notebook into pickle)
-with open("columns.pkl", "rb") as f:
+with open("models/columns.pkl", "rb") as f:
     training_columns = pickle.load(f)
 
 for col in training_columns:
@@ -73,4 +73,5 @@ if st.button("Predict"):
         st.error("⚠️ The model predicts **Heart Disease**.")
     else:
         st.success("✅ The model predicts **No Heart Disease**.")
+
 
