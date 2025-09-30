@@ -59,23 +59,25 @@ with open("models/columns1.pkl", "rb") as f:
 scaler = joblib.load("models/scaler.pkl")
 
 
+# Ensure same columns as training
 for col in training_columns:
     if col not in input_encoded:
         input_encoded[col] = 0
 
 input_encoded = input_encoded[training_columns]
 
-# ----------------------------
-# Prediction
-# ----------------------------
+
 if st.button("Predict"):
-    pred = model.predict(input_encoded)
+    input_scaled = scaler.transform(input_encoded)   
+    pred = model.predict(input_scaled)               
     result = (pred > 0.5).astype("int")[0][0]
 
     if result == 1:
         st.error("⚠️ The model predicts **Heart Disease**.")
     else:
         st.success("✅ The model predicts **No Heart Disease**.")
+
+
 
 
 
