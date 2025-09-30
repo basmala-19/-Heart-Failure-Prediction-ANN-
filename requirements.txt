@@ -1,0 +1,11 @@
+
+---
+
+### requirements.txt
+```txt
+numpy
+pandas
+scikit-learn
+tensorflow
+matplotlib
+streamlit
